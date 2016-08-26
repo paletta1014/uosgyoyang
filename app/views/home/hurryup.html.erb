@@ -1,0 +1,51 @@
+<h2>교양</h2>
+<div>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation"><a href="/">전체보기</a></li>
+    <li role="presentation" class="active"><a href="#hurryup" aria-controls="hurryup" role="tab" data-toggle="tab">자리있는 교양</a></li>
+    <li role="presentation"><a HREF="" onClick="refreshTables();"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="hurryup">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <td>교과목명</td>
+            <td>강의시간</td>
+            <td>교수님</td>
+            <td>인원</td>
+            <td>정원</td>
+          </tr>
+        </thead>
+        <tbody class="ref">
+          <% @subj.each do |node| %>
+            <% if node.xpath('tlsn_count').text.strip < node.xpath('tlsn_limit_count').text.strip%>
+              <tr>
+                <td><%= node.xpath('subject_nm').text.strip %></td>
+                <td><%= node.xpath('class_nm').text.strip %></td>
+                <td><%= node.xpath('prof_nm').text.strip %></td>
+                <td><%= node.xpath('tlsn_count').text.strip %></td>
+                <td><%= node.xpath('tlsn_limit_count').text.strip %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('#myTabs a').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+  })
+
+  function refreshTables(){
+  $(".ref").fadeOut();
+  $(".ref").load("/");
+  }
+</script>
