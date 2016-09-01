@@ -3,14 +3,14 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation"><a href="/">전체보기</a></li>
-    <li role="presentation" class="active"><a href="#hurryup" aria-controls="hurryup" role="tab" data-toggle="tab">자리있는 교양</a></li>
-    <li role="presentation"><a href="/mungwa">자리있는 교양 (인문)</a></li>
+    <li role="presentation"><a href="/hurryup">자리있는 교양</a></li>
+    <li role="presentation" class="active"><a href="#mungwa" aria-controls="mungwa" role="tab" data-toggle="tab">자리있는 교양 (인문)</a></li>
     <li role="presentation"><a HREF="" onClick="refreshTables();"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></a></li>
   </ul>
 
   <!-- Tab panes -->
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="hurryup">
+    <div role="tabpanel" class="tab-pane active" id="mungwa">
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -23,7 +23,7 @@
         </thead>
         <tbody class="ref">
           <% @subj.each do |node| %>
-            <% if node.xpath('tlsn_count').text.strip < node.xpath('tlsn_limit_count').text.strip && node.xpath('tlsn_limit_count').text.strip != '' && node.xpath('day_night_nm').text.strip != '계약'%>
+            <% if node.xpath('tlsn_count').text.strip < node.xpath('tlsn_limit_count').text.strip && node.xpath('tlsn_limit_count').text.strip != '' && node.xpath('day_night_nm').text.strip != '계약' && node.xpath('subject_div2').text.strip != '공학소양'%>
               <% if node.xpath('tlsn_limit_count').text.strip.to_i - node.xpath('tlsn_count').text.strip.to_i > 3 and  node.xpath('tlsn_limit_count').text.strip.to_i - node.xpath('tlsn_count').text.strip.to_i <8 %>
                 <tr class="warning">
                   <td><%= node.xpath('subject_nm').text.strip %></td>

@@ -1,9 +1,10 @@
-<h2>교양</h2>
+
 <div>
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">전체보기</a></li>
     <li role="presentation"><a href="/hurryup" >자리있는 교양</a></li>
+    <li role="presentation"><a href="/mungwa">자리있는 교양 (인문)</a></li>
     <li role="presentation"><a HREF="#" onClick="refreshTables();"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></a></li>
   </ul>
 
@@ -22,13 +23,15 @@
         </thead>
         <tbody class="ref">
           <% @subj.each do |node| %>
-          <tr>
-            <td><%= node.xpath('subject_nm').text.strip %></td>
-            <td><%= node.xpath('class_nm').text.strip %></td>
-            <td><%= node.xpath('prof_nm').text.strip %></td>
-            <td><%= node.xpath('tlsn_count').text.strip %></td>
-            <td><%= node.xpath('tlsn_limit_count').text.strip %></td>
-          </tr>
+            <% if node.xpath('day_night_nm').text.strip != '계약'%>
+              <tr>
+                <td><%= node.xpath('subject_nm').text.strip %></td>
+                <td><%= node.xpath('class_nm').text.strip %></td>
+                <td><%= node.xpath('prof_nm').text.strip %></td>
+                <td><%= node.xpath('tlsn_count').text.strip %></td>
+                <td><%= node.xpath('tlsn_limit_count').text.strip %></td>
+              </tr>
+            <% end %>
           <% end %>
         </tbody>
       </table>
