@@ -10,7 +10,6 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -30,10 +29,59 @@
   </head>
 
   <body>
-    <%= yield %>
-    <div style="text-align:center; ">
+
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="" class="navbar-toggle-right visible-xs" onClick="refreshTables();"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></a>
+          <a class="navbar-brand" href="/">교양을 잡자</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="/">자리있는교양<span class="sr-only">(current)</span></a></li>
+            <li><a href="/mungwa">자리있는교양(문과)</a></li>
+            <li><a href="/all">전체보기</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right hidden-xs">
+            <li>
+              <a href="" onClick="refreshTables();"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+    <div id="main_table" class="container">
+      <%= yield %>
+    </div>
+    <div style="text-align:center;">
       <h3><img src="<%=image_url 'likelion'%>" width="120" height="30">    X   김선형</h3>
       <h5>dbw03135@gmail.com</h5>
     </div>
+    <script>
+    $(function(){
+      $("#lec_table").tablesorter();
+    });
+      function refreshTables(){
+        $(".ref").fadeOut();
+        $(".ref").load("/");
+      }
+      $(document).ready(function() {
+        $('li.active').removeClass('active');
+        $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
+      });
+      $(".nav a").on("click", function(){
+         $(".nav").find(".active").removeClass("active");
+         $(this).parent().addClass("active");
+      });
+    </script>
   </body>
 </html>

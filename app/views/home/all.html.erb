@@ -1,0 +1,24 @@
+<table id="lec_table" class="table table-bordered tablesorter">
+  <thead>
+    <tr>
+      <td>교과목명</td>
+      <td class="lec_time">강의시간</td>
+      <td>교수님</td>
+      <td>인원</td>
+      <td>정원</td>
+    </tr>
+  </thead>
+  <tbody class="ref">
+    <% @subj.each do |node| %>
+      <% if node.xpath('day_night_nm').text.strip != '계약'%>
+        <tr>
+          <td><%= node.xpath('subject_nm').text.strip %></td>
+          <td class="lec_time"><%= node.xpath('class_nm').text.strip %></td>
+          <td><%= node.xpath('prof_nm').text.strip %></td>
+          <td><%= node.xpath('tlsn_count').text.strip %></td>
+          <td><%= node.xpath('tlsn_limit_count').text.strip %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

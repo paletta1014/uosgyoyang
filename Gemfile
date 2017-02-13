@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'jquery-tablesorter'
 gem 'thin'
 gem 'pg', group: :production
 gem 'rails_12factor', group: :production
