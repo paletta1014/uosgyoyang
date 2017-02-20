@@ -82,6 +82,24 @@
          $(".nav").find(".active").removeClass("active");
          $(this).parent().addClass("active");
       });
+
+      // tooltip in mobile
+      $( document ).ready(function() {
+          var isMobile = window.matchMedia("only screen and (max-width: 760px)");
+
+          if (isMobile.matches) {
+              $('[data-toggle="tooltip"]').tooltip();
+          }
+
+          $(function () {
+             $(document).on('shown.bs.tooltip', function (e) {
+                setTimeout(function () {
+                  $(e.target).tooltip('hide');
+                }, 1300);
+             });
+          });
+
+       });
     </script>
   </body>
 </html>
