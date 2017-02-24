@@ -10,7 +10,7 @@
   </thead>
   <tbody class="ref">
     <% @subj.each do |node| %>
-      <% if node.xpath('tlsn_count').text.strip < node.xpath('tlsn_limit_count').text.strip && node.xpath('tlsn_limit_count').text.strip != '' && node.xpath('day_night_nm').text.strip != '계약' && node.xpath('subject_div2').text.strip != '학문기초'%>
+      <% if node.xpath('tlsn_limit_count').text.strip != '0' && node.xpath('tlsn_count').text.strip < node.xpath('tlsn_limit_count').text.strip && node.xpath('tlsn_limit_count').text.strip != '' && node.xpath('day_night_nm').text.strip != '계약' && node.xpath('subject_div2').text.strip != '학문기초'&& node.xpath('subject_div2').text.strip != '공학소양' %>
         <% if node.xpath('tlsn_limit_count').text.strip.to_i - node.xpath('tlsn_count').text.strip.to_i > 3 and  node.xpath('tlsn_limit_count').text.strip.to_i - node.xpath('tlsn_count').text.strip.to_i <8 %>
           <tr class="warning table_row" data-toggle="tooltip" title="<%=node.xpath('class_nm').text.strip%>">
             <td><%= node.xpath('subject_nm').text.strip %></td>
