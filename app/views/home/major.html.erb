@@ -1,0 +1,86 @@
+<input type="text" id="searchInput" class="form-control" onkeyup="searchFunction()" placeholder="학과/학부 이름.." title="학과/학부 이름"><br>
+<table id="lec_table" class="table table-bordered tablesorter">
+  <thead>
+    <tr>
+      <td>학과</td>
+      <td>교과목명</td>
+      <td class="lec_time">강의시간</td>
+      <td>교수님</td>
+      <td>인원</td>
+      <td>정원</td>
+    </tr>
+  </thead>
+  <tbody class="ref">
+    <% @subj.each do |node| %>
+      <% if node.xpath('tlsn_limit_count').text.strip != '0' && node.xpath('tlsn_count').text.strip < node.xpath('tlsn_limit_count').text.strip && node.xpath('tlsn_limit_count').text.strip != '' && node.xpath('day_night_nm').text.strip != '계약'%>
+        <% if node.xpath('tlsn_limit_count').text.strip.to_i - node.xpath('tlsn_count').text.strip.to_i > 3 and  node.xpath('tlsn_limit_count').text.strip.to_i - node.xpath('tlsn_count').text.strip.to_i <8 %>
+          <tr class="warning table_row" data-toggle="tooltip" title="<%=node.xpath('class_nm').text.strip%>">
+            <td><%= node.xpath('sub_dept').text.strip %></td>
+            <td><%= node.xpath('subject_nm').text.strip %></td>
+            <td class="lec_time"><%= node.xpath('class_nm').text.strip %></td>
+            <td><%= node.xpath('prof_nm').text.strip %></td>
+            <td><%= node.xpath('tlsn_count').text.strip %></td>
+            <td><%= node.xpath('tlsn_limit_count').text.strip %></td>
+          </tr>
+        <% elsif node.xpath('tlsn_limit_count').text.strip.to_i - node.xpath('tlsn_count').text.strip.to_i > 0 and  node.xpath('tlsn_limit_count').text.strip.to_i - node.xpath('tlsn_count').text.strip.to_i < 4%>
+          <tr class="danger table_row" data-toggle="tooltip" title="<%=node.xpath('class_nm').text.strip%>">
+            <td><%= node.xpath('sub_dept').text.strip %></td>
+            <td><%= node.xpath('subject_nm').text.strip %></td>
+            <td class="lec_time"><%= node.xpath('class_nm').text.strip %></td>
+            <td><%= node.xpath('prof_nm').text.strip %></td>
+            <td><%= node.xpath('tlsn_count').text.strip %></td>
+            <td><%= node.xpath('tlsn_limit_count').text.strip %></td>
+          </tr>
+        <% else %>
+          <tr class="table_row" data-toggle="tooltip" title="<%=node.xpath('class_nm').text.strip%>">
+            <td><%= node.xpath('sub_dept').text.strip %></td>
+            <td><%= node.xpath('subject_nm').text.strip %></td>
+            <td class="lec_time"><%= node.xpath('class_nm').text.strip %></td>
+            <td><%= node.xpath('prof_nm').text.strip %></td>
+            <td><%= node.xpath('tlsn_count').text.strip %></td>
+            <td><%= node.xpath('tlsn_limit_count').text.strip %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+// Run on page load
+window.onload = function() {
+
+    // If sessionStorage is storing default values (ex. name), exit the function and do not restore data
+    if (localStorage.getItem('search') == "search") {
+        return;
+    }
+
+    // If values are not blank, restore them to the fields
+    var search = localStorage.getItem('search');
+    if (search !== null) $('#searchInput').val(search);
+    searchFunction();
+}
+
+// Before refreshing the page, save the form data to sessionStorage
+window.onbeforeunload = function() {
+    localStorage.setItem("search", $('#searchInput').val());
+}
+
+function searchFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("searchInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("lec_table");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
