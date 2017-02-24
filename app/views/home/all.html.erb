@@ -11,7 +11,7 @@
   <tbody class="ref">
     <% @subj.each do |node| %>
       <% if node.xpath('day_night_nm').text.strip != '계약'%>
-        <tr>
+        <tr class="table_row" data-toggle="tooltip" title="<%=node.xpath('class_nm').text.strip%>">
           <td><%= node.xpath('subject_nm').text.strip %></td>
           <td class="lec_time"><%= node.xpath('class_nm').text.strip %></td>
           <td><%= node.xpath('prof_nm').text.strip %></td>

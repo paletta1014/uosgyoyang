@@ -12,7 +12,7 @@
     <% @subj.each do |node| %>
       <% if node.xpath('tlsn_count').text.strip < node.xpath('tlsn_limit_count').text.strip && node.xpath('tlsn_limit_count').text.strip != '' && node.xpath('day_night_nm').text.strip != '계약'%>
         <% if node.xpath('tlsn_limit_count').text.strip.to_i - node.xpath('tlsn_count').text.strip.to_i > 3 and  node.xpath('tlsn_limit_count').text.strip.to_i - node.xpath('tlsn_count').text.strip.to_i <8 %>
-          <tr class="warning table_row">
+          <tr class="warning table_row" data-toggle="tooltip" title="<%=node.xpath('class_nm').text.strip%>">
             <td><%= node.xpath('subject_nm').text.strip %></td>
             <td class="lec_time"><%= node.xpath('class_nm').text.strip %></td>
             <td><%= node.xpath('prof_nm').text.strip %></td>
@@ -20,7 +20,7 @@
             <td><%= node.xpath('tlsn_limit_count').text.strip %></td>
           </tr>
         <% elsif node.xpath('tlsn_limit_count').text.strip.to_i - node.xpath('tlsn_count').text.strip.to_i > 0 and  node.xpath('tlsn_limit_count').text.strip.to_i - node.xpath('tlsn_count').text.strip.to_i < 4%>
-          <tr class="danger table_row">
+          <tr class="danger table_row" data-toggle="tooltip" title="<%=node.xpath('class_nm').text.strip%>">
             <td><%= node.xpath('subject_nm').text.strip %></td>
             <td class="lec_time"><%= node.xpath('class_nm').text.strip %></td>
             <td><%= node.xpath('prof_nm').text.strip %></td>
