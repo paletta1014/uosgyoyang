@@ -28,6 +28,7 @@ class Message < ApplicationRecord
 "물수리",
 "매",
 "참매",
+"장산곶매",
 "왕독수리",
 "칡부엉이",
 "붉은솔개",
