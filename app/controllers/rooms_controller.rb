@@ -1,5 +1,8 @@
 class RoomsController < ApplicationController
   def show
-    @messages = Message.last(50)
+    if Message.first?
+      @messages = Message.last(50)
+    else
+      @messages = Message.all
   end
 end
