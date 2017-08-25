@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'jquery-tablesorter'
 gem 'thin'
-#gem 'pg', group: :production
+gem 'pg', group: :production
 gem 'rails_12factor', group: :production
 gem 'sqlite3', group: :development
 gem 'nokogiri'
