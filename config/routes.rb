@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  mount ActionCable.server => '/cable'
+
+  get 'chat' => 'rooms#show'
+
   get 'home/index'
   root 'home#index'
   get '/all' => 'home#all'

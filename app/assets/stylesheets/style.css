@@ -37,3 +37,14 @@
     background-color: rgba(34, 36, 38, 0.1);
     font-weight: bold;
 }
+
+#messages{
+  padding-left: 10px;
+  height: 400px;
+  overflow: scroll;
+}
+
+input[type="text"],
+textarea {
+  font-size: 16px;
+}

@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'jquery-tablesorter'
 gem 'thin'
-gem 'pg', group: :production
+#gem 'pg', group: :production
 gem 'rails_12factor', group: :production
 gem 'sqlite3', group: :development
 gem 'nokogiri'
@@ -10,7 +10,7 @@ gem 'mechanize'
 gem 'hirb'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.0'
+gem 'rails', '~> 5.1.3'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 # Use Puma as the app server
